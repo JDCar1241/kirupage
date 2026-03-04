@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultorio Odontológico Kiru</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+/* ── VARIABLES ── */
+:root {
+    --cream: #faf7f2;
+    --blue-deep: #0a2a4a;
+    --blue-mid: #1565a8;
+    --blue-bright: #1e90ff;
+    --blue-soft: #d6e8ff;
+    --gold: #c9a84c;
+    --gold-light: #f0d98a;
+    --text: #1a2535;
+    --text-muted: #5a6a7e;
+    --shadow: 0 8px 40px rgba(10,42,74,0.10);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--text); overflow-x:hidden; }
+
+/* NAV */
+nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 6vw;
+    background:rgba(250,247,242,0.92);
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(10,42,74,0.07);
+    transition:box-shadow 0.3s;
+}
+nav.scrolled { box-shadow:0 4px 24px rgba(10,42,74,0.12); }
+.nav-logo { font-family:'Playfair Display',serif; font-weight:900; font-size:1.35rem; color:var(--blue-deep); }
+.nav-logo span { color:var(--gold); }
+.nav-links { display:flex; gap:28px; list-style:none; }
+.nav-links a { text-decoration:none; font-size:0.88rem; font-weight:500; color:var(--text-muted); transition:color 0.2s; }
+.nav-links a:hover { color:var(--blue-mid); }
+.nav-cta { background:var(--blue-deep)!important; color:#fff!important; padding:10px 22px; border-radius:50px; }
+.nav-cta:hover { background:var(--blue-mid)!important; }
+
+/* HERO */
+.hero {
+    min-height:100vh; display:grid; grid-template-columns:1fr 1fr;
+    align-items:center; padding:120px 6vw 80px; gap:60px; position:relative; overflow:hidden;
+}
+.hero::before {
+    content:''; position:absolute; top:-200px; right:-200px;
+    width:700px; height:700px; border-radius:50%;
+    background:radial-gradient(circle,rgba(30,144,255,0.12) 0%,transparent 70%);
+    pointer-events:none;
+}
+.hero-tag {
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--blue-soft); color:var(--blue-mid);
+    font-size:0.75rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
+    padding:6px 16px; border-radius:50px; margin-bottom:24px;
+    animation:fadeUp 0.6s 0.1s both;
+}
+.hero h1 {
+    font-family:'Playfair Display',serif; font-size:clamp(2.4rem,5vw,4rem);
+    font-weight:900; line-height:1.1; color:var(--blue-deep); margin-bottom:20px;
+    animation:fadeUp 0.6s 0.25s both;
+}
+.hero h1 em { font-style:normal; color:var(--gold); }
+.hero-sub { font-size:1rem; color:var(--text-muted); max-width:420px; line-height:1.75; margin-bottom:36px; animation:fadeUp 0.6s 0.4s both; }
+.hero-actions { display:flex; gap:16px; align-items:center; animation:fadeUp 0.6s 0.55s both; }
+.btn-primary {
+    background:var(--blue-deep); color:#fff; text-decoration:none;
+    padding:14px 30px; border-radius:50px; font-weight:500; font-size:0.95rem;
+    transition:background 0.2s,transform 0.2s; box-shadow:0 4px 20px rgba(10,42,74,0.25);
+}
+.btn-primary:hover { background:var(--blue-mid); transform:translateY(-2px); }
+.btn-secondary { color:var(--blue-mid); text-decoration:none; font-weight:500; font-size:0.95rem; }
+.btn-secondary::after { content:' →'; }
+.hero-visual { display:flex; justify-content:center; align-items:center; animation:fadeIn 0.8s 0.3s both; }
+.tooth-card {
+    background:#fff; border-radius:32px; padding:48px; box-shadow:var(--shadow);
+    text-align:center; position:relative; max-width:320px; width:100%;
+}
+.tooth-icon { font-size:5rem; display:block; margin-bottom:16px; animation:float 3s ease-in-out infinite; }
+.tooth-card h3 { font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--blue-deep); margin-bottom:8px; }
+.tooth-card p { color:var(--text-muted); font-size:0.88rem; }
+.badge-float {
+    position:absolute; background:#fff; border-radius:14px; padding:10px 14px;
+    box-shadow:0 4px 20px rgba(10,42,74,0.12); font-size:0.8rem; font-weight:500;
+    color:var(--blue-deep); display:flex; align-items:center; gap:8px; white-space:nowrap;
+}
+.badge-1 { top:10px; right:-20px; animation:floatBadge1 4s ease-in-out infinite; }
+.badge-2 { bottom:20px; left:-30px; animation:floatBadge2 4s ease-in-out infinite 1s; }
+.dot { width:8px; height:8px; border-radius:50%; background:#22c55e; animation:pulse 2s infinite; }
+
+/* STATS */
+.stats { display:grid; grid-template-columns:repeat(3,1fr); background:var(--blue-deep); padding:50px 6vw; }
+.stat-item { text-align:center; padding:20px; border-right:1px solid rgba(255,255,255,0.1); }
+.stat-item:last-child { border-right:none; }
+.stat-num { font-family:'Playfair Display',serif; font-size:2.8rem; font-weight:900; color:var(--gold-light); display:block; }
+.stat-label { color:rgba(255,255,255,0.65); font-size:0.85rem; margin-top:4px; }
+
+/* SECCIONES */
+section { padding:90px 6vw; }
+.section-tag { display:inline-block; font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-bottom:14px; }
+.section-title { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:700; color:var(--blue-deep); line-height:1.2; margin-bottom:16px; }
+.section-sub { color:var(--text-muted); font-size:0.97rem; max-width:480px; line-height:1.75; }
+
+/* ABOUT */
+.about { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; background:#fff; }
+.about-image { background:linear-gradient(135deg,var(--blue-soft),#e8f4fd); border-radius:32px; padding:60px 40px; text-align:center; }
+.about-emoji { font-size:6rem; display:block; margin-bottom:16px; animation:float 3s ease-in-out infinite 1s; }
+.about-image p { font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--blue-deep); font-weight:600; }
+.values-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:32px; }
+.value-card { background:var(--cream); border-radius:14px; padding:18px; border:1px solid rgba(10,42,74,0.06); transition:transform 0.2s,box-shadow 0.2s; }
+.value-card:hover { transform:translateY(-3px); box-shadow:var(--shadow); }
+.value-card .icon { font-size:1.4rem; display:block; margin-bottom:6px; }
+.value-card h4 { font-size:0.88rem; font-weight:600; color:var(--blue-deep); margin-bottom:3px; }
+.value-card p { font-size:0.78rem; color:var(--text-muted); }
+
+/* REDES SOCIALES */
+.social { background:var(--cream); }
+.social-intro { text-align:center; margin-bottom:48px; }
+.social-intro .section-sub { margin:0 auto; }
+.social-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+.social-card { border-radius:22px; padding:36px 26px; text-decoration:none; transition:transform 0.3s,box-shadow 0.3s; }
+.social-card:hover { transform:translateY(-5px); box-shadow:0 16px 50px rgba(0,0,0,0.12); }
+.social-card.instagram { background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+.social-card.facebook  { background:linear-gradient(135deg,#1877f2,#0d55c2); }
+.social-card.whatsapp  { background:linear-gradient(135deg,#25d366,#128c7e); }
+.s-icon { font-size:2.4rem; margin-bottom:14px; display:block; }
+.social-card h3 { font-size:1.05rem; color:#fff; font-weight:700; margin-bottom:6px; }
+.social-card p  { font-size:0.85rem; color:rgba(255,255,255,0.8); margin-bottom:18px; }
+.s-link { display:inline-flex; align-items:center; background:rgba(255,255,255,0.2); color:#fff; font-size:0.8rem; font-weight:600; padding:7px 14px; border-radius:50px; backdrop-filter:blur(8px); transition:background 0.2s; }
+.social-card:hover .s-link { background:rgba(255,255,255,0.35); }
+
+/* DOCTORES / LIBRO */
+.doctors { background:#fff; text-align:center; }
+.doctors-header { margin-bottom:50px; }
+.doctors-header .section-sub { margin:0 auto; }
+
+.book-wrapper { display:flex; flex-direction:column; align-items:center; gap:24px; }
+.book { width:100%; max-width:860px; }
+
+/* Portada */
+.book-cover {
+    background:linear-gradient(135deg,var(--blue-deep),#1a4a7a);
+    border-radius:12px 24px 24px 12px;
+    padding:64px 48px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px;
+    min-height:420px;
+    box-shadow:-8px 8px 40px rgba(10,42,74,0.35);
+    position:relative; overflow:hidden;
+    cursor:default;
+}
+.book-cover::before {
+    content:''; position:absolute; left:0; top:0; bottom:0; width:32px;
+    background:linear-gradient(90deg,rgba(0,0,0,0.4) 0%,transparent 100%);
+    pointer-events:none;
+}
+.book-cover::after {
+    content:''; position:absolute; top:-80px; right:-80px;
+    width:260px; height:260px; border-radius:50%;
+    background:rgba(255,255,255,0.04);
+    pointer-events:none;
+}
+.book-cover > * { position:relative; z-index:2; }
+.book-cover-icon { font-size:4.5rem; display:block; animation:float 3s ease-in-out infinite; }
+.book-cover h3 { font-family:'Playfair Display',serif; font-size:2rem; color:#fff; font-weight:900; line-height:1.2; text-align:center; }
+.book-cover p { color:rgba(255,255,255,0.65); font-size:0.9rem; }
+
+.btn-open-book {
+    background:var(--gold); color:var(--blue-deep); border:none; cursor:pointer;
+    font-family:'DM Sans',sans-serif; font-weight:700; font-size:1rem;
+    padding:14px 36px; border-radius:50px;
+    transition:background 0.2s,transform 0.2s;
+    position:relative; z-index:10;
+}
+.btn-open-book:hover { background:var(--gold-light); transform:translateY(-2px); }
+
+/* Página doctor */
+.book-page {
+    display:grid; grid-template-columns:280px 1fr;
+    border-radius:12px 24px 24px 12px;
+    overflow:hidden;
+    box-shadow:-8px 8px 40px rgba(10,42,74,0.22);
+    min-height:420px;
+}
+.doctor-photo {
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(160deg,#fce8f0,#f5c6d8);
+    position:relative; overflow:hidden; min-height:420px;
+}
+.doctor-photo.blue-bg { background:linear-gradient(160deg,var(--blue-soft),#a8cfee); }
+.doctor-photo img { width:100%; height:100%; object-fit:cover; object-position:top center; display:block; position:absolute; top:0; left:0; }
+.photo-fallback { font-size:6rem; display:block; }
+.doctor-info {
+    background:#fff; padding:44px 36px;
+    display:flex; flex-direction:column; justify-content:center;
+    position:relative;
+}
+.doctor-info::before {
+    content:''; position:absolute; left:0; top:0; bottom:0; width:4px;
+    background:linear-gradient(180deg,var(--gold),var(--blue-mid)); opacity:0.3;
+}
+.page-number { position:absolute; top:20px; right:24px; font-family:'Playfair Display',serif; font-size:0.7rem; color:rgba(10,42,74,0.2); font-weight:700; letter-spacing:0.12em; }
+.doctor-specialty { display:inline-block; background:#fce8f0; color:#b03060; font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:5px 14px; border-radius:50px; margin-bottom:14px; }
+.doctor-specialty.blue { background:var(--blue-soft); color:var(--blue-mid); }
+.doctor-name { font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; color:var(--blue-deep); line-height:1.2; margin-bottom:16px; }
+.doctor-divider { width:40px; height:3px; background:var(--gold); border-radius:2px; margin-bottom:20px; }
+.doctor-divider.blue { background:var(--blue-mid); }
+.doctor-details { list-style:none; display:flex; flex-direction:column; gap:10px; margin-bottom:26px; }
+.doctor-details li { display:flex; align-items:flex-start; gap:10px; font-size:0.86rem; color:var(--text-muted); line-height:1.5; text-align:left; }
+.detail-icon { font-size:1rem; flex-shrink:0; }
+.btn-doctor { display:inline-block; background:var(--blue-deep); color:#fff; text-decoration:none; font-weight:600; font-size:0.86rem; padding:12px 22px; border-radius:50px; transition:background 0.2s,transform 0.2s; }
+.btn-doctor:hover { background:var(--blue-mid); transform:translateY(-1px); }
+.btn-doctor.blue { background:var(--blue-mid); }
+.btn-doctor.blue:hover { background:var(--blue-bright); }
+
+/* Nav libro */
+.book-nav { display:flex; align-items:center; gap:20px; }
+.book-btn {
+    background:var(--blue-deep); color:#fff; border:none; cursor:pointer;
+    width:48px; height:48px; border-radius:50%; font-size:1.5rem;
+    display:flex; align-items:center; justify-content:center;
+    transition:background 0.2s,transform 0.2s; touch-action:manipulation;
+}
+.book-btn:hover:not(:disabled) { background:var(--blue-mid); transform:scale(1.1); }
+.book-btn:disabled { background:rgba(10,42,74,0.18); cursor:not-allowed; }
+.book-dots { display:flex; gap:8px; align-items:center; }
+.book-dot { width:10px; height:10px; border-radius:50%; background:rgba(10,42,74,0.18); cursor:pointer; border:none; padding:0; transition:background 0.3s,transform 0.3s; }
+.book-dot.active { background:var(--blue-deep); transform:scale(1.3); }
+
+/* SERVICIOS */
+.services { background:var(--cream); }
+.services-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:52px; flex-wrap:wrap; gap:20px; }
+.services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px; }
+.service-card {
+    background:#fff; border-radius:22px; padding:34px 26px;
+    border:1px solid rgba(10,42,74,0.06);
+    transition:transform 0.3s,box-shadow 0.3s;
+    position:relative; overflow:hidden;
+}
+.service-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--blue-mid),var(--blue-bright)); transform:scaleX(0); transition:transform 0.3s; transform-origin:left; }
+.service-card:hover { transform:translateY(-5px); box-shadow:0 16px 50px rgba(10,42,74,0.12); }
+.service-card:hover::after { transform:scaleX(1); }
+.service-card--dark { background:var(--blue-deep); border-color:var(--blue-deep); }
+.service-card--dark h3 { color:#fff; }
+.service-card--dark p  { color:rgba(255,255,255,0.7); }
+.service-icon { font-size:2rem; margin-bottom:16px; display:block; }
+.service-card h3 { font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--blue-deep); margin-bottom:10px; }
+.service-card p  { font-size:0.86rem; color:var(--text-muted); line-height:1.65; }
+.btn-consult { display:inline-block; margin-top:16px; background:var(--gold); color:var(--blue-deep); text-decoration:none; font-weight:700; padding:10px 20px; border-radius:50px; font-size:0.84rem; transition:background 0.2s; }
+.btn-consult:hover { background:var(--gold-light); }
+
+/* CTA BANNER */
+.cta-banner { background:var(--blue-deep); padding:80px 6vw; text-align:center; position:relative; overflow:hidden; }
+.cta-banner::before { content:''; position:absolute; top:-100px; left:50%; transform:translateX(-50%); width:600px; height:300px; border-radius:50%; background:rgba(30,144,255,0.15); pointer-events:none; }
+.cta-banner h2 { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,3rem); color:#fff; margin-bottom:14px; position:relative; }
+.cta-banner h2 span { color:var(--gold-light); }
+.cta-banner p { color:rgba(255,255,255,0.65); margin-bottom:34px; font-size:1rem; position:relative; }
+.btn-gold { background:var(--gold); color:var(--blue-deep); text-decoration:none; font-weight:700; padding:16px 40px; border-radius:50px; display:inline-block; transition:background 0.2s,transform 0.2s; }
+.btn-gold:hover { background:var(--gold-light); transform:translateY(-2px); }
+
+/* FOOTER */
+footer { background:#061525; padding:36px 6vw; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
+.footer-logo { font-family:'Playfair Display',serif; font-weight:900; font-size:1.1rem; color:#fff; }
+.footer-logo span { color:var(--gold); }
+footer p { color:rgba(255,255,255,0.4); font-size:0.8rem; }
+.footer-links { display:flex; gap:20px; }
+.footer-links a { color:rgba(255,255,255,0.5); text-decoration:none; font-size:0.8rem; transition:color 0.2s; }
+.footer-links a:hover { color:var(--gold); }
+
+/* ANIMACIONES */
+@keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn  { from{opacity:0} to{opacity:1} }
+@keyframes float   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+@keyframes floatBadge1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(4px,-8px)} }
+@keyframes floatBadge2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-4px,6px)} }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(1.4)} }
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .hero { grid-template-columns:1fr; text-align:center; padding-top:100px; }
+    .hero-sub { margin:0 auto 36px; }
+    .hero-actions { justify-content:center; }
+    .hero-visual { display:none; }
+    .about { grid-template-columns:1fr; }
+    .about-image { display:none; }
+    .stats { grid-template-columns:1fr; }
+    .stat-item { border-right:none; border-bottom:1px solid rgba(255,255,255,0.1); }
+    .stat-item:last-child { border-bottom:none; }
+    .social-grid { grid-template-columns:1fr; }
+    .book-page { grid-template-columns:1fr; }
+    .doctor-photo { min-height:240px; }
+    .doctor-info { padding:28px 22px 32px; }
+    .book-cover { padding:48px 28px; min-height:340px; border-radius:16px; }
+    .nav-links { display:none; }
+    footer { flex-direction:column; text-align:center; }
+}
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+    <div class="nav-logo">Kiru<span>.</span></div>
+    <ul class="nav-links">
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#doctores">Doctores</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="https://wa.me/message/7APCBTAZRW4CI1" target="_blank" class="nav-cta">Agendar cita</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+    <div class="hero-content">
+        <div class="hero-tag">Odontología de confianza · Lima, Perú</div>
+        <h1>Tu sonrisa merece el mejor <em>cuidado</em></h1>
+        <p class="hero-sub">En Kiru combinamos tecnología moderna con trato cálido para que cada visita sea una experiencia agradable para toda la familia.</p>
+        <div class="hero-actions">
+            <a href="https://wa.me/message/7APCBTAZRW4CI1" target="_blank" class="btn-primary">Agendar cita →</a>
+            <a href="#servicios" class="btn-secondary">Ver servicios</a>
+        </div>
+    </div>
+    <div class="hero-visual">
+        <div class="tooth-card">
+            <span class="tooth-icon">🦷</span>
+            <h3>Consultorio Kiru</h3>
+            <p>Atención profesional, resultados que se notan</p>
+            <div class="badge-float badge-1"><span class="dot"></span> Atendiendo ahora</div>
+            <div class="badge-float badge-2">⭐ Pacientes satisfechos</div>
+        </div>
+    </div>
+</header>
+
+<!-- STATS -->
+<div class="stats">
+    <div class="stat-item"><span class="stat-num">500+</span><span class="stat-label">Pacientes atendidos</span></div>
+    <div class="stat-item"><span class="stat-num">5+</span><span class="stat-label">Años de experiencia</span></div>
+    <div class="stat-item"><span class="stat-num">100%</span><span class="stat-label">Compromiso con tu salud</span></div>
+</div>
+
+<main>
+
+<!-- 1. NOSOTROS -->
+<section class="about" id="nosotros">
+    <div class="about-image">
+        <span class="about-emoji">😁</span>
+        <p>Cuidando sonrisas con pasión</p>
+    </div>
+    <div>
+        <span class="section-tag">Sobre nosotros</span>
+        <h2 class="section-title">Odontología con <br>corazón y tecnología</h2>
+        <p class="section-sub">En Kiru brindamos atención odontológica profesional con equipos modernos y un trato cercano.</p>
+        <div class="values-grid">
+            <div class="value-card"><span class="icon">🔬</span><h4>Tecnología moderna</h4><p>Equipos de última generación</p></div>
+            <div class="value-card"><span class="icon">🤝</span><h4>Trato cálido</h4><p>Un equipo que te escucha</p></div>
+            <div class="value-card"><span class="icon">👨‍👩‍👧</span><h4>Para toda la familia</h4><p>Niños, adultos y mayores</p></div>
+            <div class="value-card"><span class="icon">✅</span><h4>Garantía de calidad</h4><p>Resultados que duran</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- 2. REDES SOCIALES -->
+<section class="social" id="contacto">
+    <div class="social-intro">
+        <span class="section-tag">Síguenos y escríbenos</span>
+        <h2 class="section-title">Encuéntranos en redes sociales</h2>
+        <p class="section-sub">Estamos en Instagram, Facebook y WhatsApp. ¡Escríbenos cuando quieras!</p>
+    </div>
+    <div class="social-grid">
+        <a href="https://www.instagram.com/dental.kiru" target="_blank" class="social-card instagram">
+            <span class="s-icon">📸</span><h3>Instagram</h3>
+            <p>Fotos, casos clínicos y consejos de salud bucal.</p>
+            <span class="s-link">@dental.kiru →</span>
+        </a>
+        <a href="https://www.facebook.com/share/18LA1jwKt5/" target="_blank" class="social-card facebook">
+            <span class="s-icon">👥</span><h3>Facebook</h3>
+            <p>Noticias, promociones y atención al cliente.</p>
+            <span class="s-link">Kiru Odontológico →</span>
+        </a>
+        <a href="https://wa.me/message/7APCBTAZRW4CI1" target="_blank" class="social-card whatsapp">
+            <span class="s-icon">💬</span><h3>WhatsApp</h3>
+            <p>Agenda tu cita de forma rápida y directa.</p>
+            <span class="s-link">+51 989 871 187 →</span>
+        </a>
+    </div>
+</section>
+
+<!-- 3. DOCTORES -->
+<section class="doctors" id="doctores">
+    <div class="doctors-header">
+        <span class="section-tag">Nuestro equipo</span>
+        <h2 class="section-title">Conoce a los especialistas<br>detrás de tu sonrisa</h2>
+        <p class="section-sub">Profesionales comprometidos con tu salud bucal.</p>
+    </div>
+    <div class="book-wrapper">
+        <div class="book" id="book">
+
+            <!-- PORTADA -->
+            <div id="s0">
+                <div class="book-cover">
+                    <span class="book-cover-icon">🦷</span>
+                    <h3>Nuestros<br>Especialistas</h3>
+                    <p>Consultorio Odontológico Kiru</p>
+                    <button class="btn-open-book" onclick="bookGo(1)">Abrir →</button>
+                </div>
+            </div>
+
+            <!-- PÁGINA 1 — Dra. Anmi -->
+            <div id="s1" style="display:none">
+                <div class="book-page">
+                    <div class="doctor-photo">
+                        <img src="imagenes/doctora-anmi.jpg" alt="Dra. Anmi Cárdenas Vásquez"
+                             onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                        <span class="photo-fallback" style="display:none">👩‍⚕️</span>
+                    </div>
+                    <div class="doctor-info">
+                        <div class="page-number">01 / 02</div>
+                        <span class="doctor-specialty">Ortodoncia</span>
+                        <h3 class="doctor-name">Dra. Anmi Cárdenas Vásquez</h3>
+                        <div class="doctor-divider"></div>
+                        <ul class="doctor-details">
+                            <li><span class="detail-icon">🎓</span><span>Universidad Privada Antenor Orrego</span></li>
+                            <li><span class="detail-icon">🦷</span><span>Especialista en Ortodoncia y Ortopedia Maxilar</span></li>
+                            <li><span class="detail-icon">✨</span><span>Brackets metálicos, estéticos y alineadores</span></li>
+                            <li><span class="detail-icon">❤️</span><span>Atención personalizada para niños y adultos</span></li>
+                        </ul>
+                        <a href="https://wa.me/message/7APCBTAZRW4CI1" target="_blank" class="btn-doctor">Agendar con la Dra. →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PÁGINA 2 — Dr. Daniel -->
+            <div id="s2" style="display:none">
+                <div class="book-page">
+                    <div class="doctor-photo blue-bg">
+                        <img src="imagenes/doctor-daniel.jpg" alt="Dr. Daniel Rosario Reyes"
+                             onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                        <span class="photo-fallback" style="display:none">👨‍⚕️</span>
+                    </div>
+                    <div class="doctor-info">
+                        <div class="page-number">02 / 02</div>
+                        <span class="doctor-specialty blue">Endodoncia y Cirugía</span>
+                        <h3 class="doctor-name">Dr. Daniel Rosario Reyes</h3>
+                        <div class="doctor-divider blue"></div>
+                        <ul class="doctor-details">
+                            <li><span class="detail-icon">🎓</span><span>Universidad Privada Antenor Orrego</span></li>
+                            <li><span class="detail-icon">🦷</span><span>Especialista en Endodoncia y Cirugía Oral</span></li>
+                            <li><span class="detail-icon">🔬</span><span>Tratamientos de conducto con tecnología rotatoria</span></li>
+                            <li><span class="detail-icon">🩺</span><span>Extracciones simples y cirugías complejas</span></li>
+                        </ul>
+                        <a href="https://wa.me/message/7APCBTAZRW4CI1" target="_blank" class="btn-doctor blue">Agendar con el Dr. →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTRAPORTADA -->
+            <div id="s3" style="display:none">
+                <div class="book-cover">
+                    <span class="book-cover-icon">⭐</span>
+                    <p style="color:rgba(255,255,255,0.85);font-size:1.1rem;font-style:italic;">"Tu sonrisa es nuestra prioridad"</p>
+                    <button class="btn-open-book" onclick="bookGo(0)">← Volver al inicio</button>
+                </div>
+            </div>
+
+        </div><!-- /book -->
+
+        <div class="book-nav">
+            <button class="book-btn" id="bPrev" onclick="bookGo(bookCur-1)">‹</button>
+            <div class="book-dots">
+                <span class="book-dot active" onclick="bookGo(0)"></span>
+                <span class="book-dot" onclick="bookGo(1)"></span>
+                <span class="book-dot" onclick="bookGo(2)"></span>
+                <span class="book-dot" onclick="bookGo(3)"></span>
+            </div>
+            <button class="book-btn" id="bNext" onclick="bookGo(bookCur+1)">›</button>
+        </div>
+    </div>
+</section>
+
+<!-- 4. SERVICIOS -->
+<section class="services" id="servicios">
+    <div class="services-header">
+        <div>
+            <span class="section-tag">Lo que ofrecemos</span>
+            <h2 class="section-title">Nuestros servicios</h2>
+        </div>
+        <p class="section-sub">Tratamientos completos para mantener tu salud bucal en óptimas condiciones.</p>
+    </div>
+    <div class="services-grid">
+        <div class="service-card"><span class="service-icon">🧹</span><h3>Limpieza dental</h3><p>Profilaxis profesional para eliminar sarro y manchas.</p></div>
+        <div class="service-card"><span class="service-icon">😬</span><h3>Ortodoncia</h3><p>Brackets y alineadores para lograr una sonrisa perfecta.</p></div>
+        <div class="service-card"><span class="service-icon">✨</span><h3>Blanqueamiento dental</h3><p>Tratamiento seguro para recuperar la luminosidad de tu sonrisa.</p></div>
+        <div class="service-card"><span class="service-icon">🦴</span><h3>Implantes dentales</h3><p>Solución permanente para reemplazar dientes perdidos.</p></div>
+        <div class="service-card"><span class="service-icon">🩺</span><h3>Extracciones</h3><p>Procedimiento seguro y sin dolor para tu salud bucal.</p></div>
+        <div class="service-card service-card--dark">
+            <span class="service-icon">💬</span><h3>¿Tienes dudas?</h3>
+            <p>Contáctanos por WhatsApp y te orientamos sin compromiso.</p>
+            <a href="https://wa.me/message/7APCBTAZRW4CI1" target="_blank" class="btn-consult">Consultar ahora</a>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- CTA -->
+<div class="cta-banner">
+    <h2>¿Listo para <span>mejorar tu sonrisa?</span></h2>
+    <p>Agenda tu consulta hoy mismo — sin esperas, sin complicaciones.</p>
+    <a href="https://wa.me/message/7APCBTAZRW4CI1" target="_blank" class="btn-gold">Agendar por WhatsApp</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-logo">Kiru<span>.</span></div>
+    <p>© 2026 Consultorio Odontológico Kiru · Todos los derechos reservados</p>
+    <div class="footer-links">
+        <a href="#nosotros">Nosotros</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#contacto">Contacto</a>
+    </div>
+</footer>
+
+<script>
+/* ── LIBRO ── */
+var bookCur = 0;
+var bookTotal = 4;
+
+function bookGo(n) {
+    if (n < 0 || n >= bookTotal) return;
+    for (var i = 0; i < bookTotal; i++) {
+        document.getElementById('s' + i).style.display = 'none';
+    }
+    document.getElementById('s' + n).style.display = 'block';
+    bookCur = n;
+
+    var dots = document.querySelectorAll('.book-dot');
+    for (var j = 0; j < dots.length; j++) {
+        dots[j].classList.toggle('active', j === n);
+    }
+    document.getElementById('bPrev').disabled = (n === 0);
+    document.getElementById('bNext').disabled = (n === bookTotal - 1);
+}
+
+/* Swipe móvil */
+var bk = document.getElementById('book');
+var tx = 0;
+bk.addEventListener('touchstart', function(e){ tx = e.changedTouches[0].screenX; }, {passive:true});
+bk.addEventListener('touchend',   function(e){
+    var d = tx - e.changedTouches[0].screenX;
+    if (d >  50) bookGo(bookCur + 1);
+    if (d < -50) bookGo(bookCur - 1);
+}, {passive:true});
+
+/* ── NAV ── */
+window.addEventListener('scroll', function(){
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+/* ── STATS ── */
+var statsRan = false;
+window.addEventListener('scroll', function(){
+    if (statsRan) return;
+    var s = document.querySelector('.stats');
+    if (s && s.getBoundingClientRect().top < window.innerHeight) {
+        statsRan = true;
+        document.querySelectorAll('.stat-num').forEach(function(el){
+            var raw = el.textContent, num = parseInt(raw), suf = raw.replace(/[0-9]/g,''), cur = 0, step = Math.ceil(num/60);
+            var t = setInterval(function(){ cur = Math.min(cur+step,num); el.textContent=cur+suf; if(cur>=num)clearInterval(t); }, 25);
+        });
+    }
+});
+</script>
+</body>
+</html>
