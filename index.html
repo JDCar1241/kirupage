@@ -7,7 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-/* ── VARIABLES ── */
 :root {
     --cream: #faf7f2;
     --blue-deep: #0a2a4a;
@@ -29,7 +28,7 @@ nav {
     position:fixed; top:0; left:0; right:0; z-index:100;
     display:flex; align-items:center; justify-content:space-between;
     padding:18px 6vw;
-    background:rgba(250,247,242,0.92);
+    background:rgba(250,247,242,0.95);
     backdrop-filter:blur(16px);
     border-bottom:1px solid rgba(10,42,74,0.07);
     transition:box-shadow 0.3s;
@@ -40,13 +39,14 @@ nav.scrolled { box-shadow:0 4px 24px rgba(10,42,74,0.12); }
 .nav-links { display:flex; gap:28px; list-style:none; }
 .nav-links a { text-decoration:none; font-size:0.88rem; font-weight:500; color:var(--text-muted); transition:color 0.2s; }
 .nav-links a:hover { color:var(--blue-mid); }
-.nav-cta { background:var(--blue-deep)!important; color:#fff!important; padding:10px 22px; border-radius:50px; }
+.nav-cta { background:var(--blue-deep)!important; color:#fff!important; padding:10px 22px; border-radius:50px; transition:background 0.2s!important; }
 .nav-cta:hover { background:var(--blue-mid)!important; }
 
 /* HERO */
 .hero {
     min-height:100vh; display:grid; grid-template-columns:1fr 1fr;
-    align-items:center; padding:120px 6vw 80px; gap:60px; position:relative; overflow:hidden;
+    align-items:center; padding:120px 6vw 80px; gap:60px;
+    position:relative; overflow:hidden;
 }
 .hero::before {
     content:''; position:absolute; top:-200px; right:-200px;
@@ -67,11 +67,27 @@ nav.scrolled { box-shadow:0 4px 24px rgba(10,42,74,0.12); }
     animation:fadeUp 0.6s 0.25s both;
 }
 .hero h1 em { font-style:normal; color:var(--gold); }
-.hero-sub { font-size:1rem; color:var(--text-muted); max-width:420px; line-height:1.75; margin-bottom:36px; animation:fadeUp 0.6s 0.4s both; }
+.hero-sub {
+    font-size:1rem; color:var(--text-muted); max-width:440px; line-height:1.75;
+    margin-bottom:12px; animation:fadeUp 0.6s 0.4s both;
+}
+.hero-address {
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:0.88rem; color:var(--blue-mid); font-weight:600;
+    background:var(--blue-soft); padding:9px 18px; border-radius:50px;
+    margin-bottom:32px; animation:fadeUp 0.6s 0.5s both;
+    text-decoration:none; border:1.5px solid rgba(21,101,168,0.2);
+    transition:background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.hero-address:hover {
+    background:#c5ddf7;
+    transform:translateY(-2px);
+    box-shadow:0 4px 16px rgba(21,101,168,0.15);
+}
 .hero-actions { display:flex; gap:16px; align-items:center; animation:fadeUp 0.6s 0.55s both; }
 .btn-primary {
     background:var(--blue-deep); color:#fff; text-decoration:none;
-    padding:14px 30px; border-radius:50px; font-weight:500; font-size:0.95rem;
+    padding:14px 30px; border-radius:50px; font-weight:600; font-size:0.95rem;
     transition:background 0.2s,transform 0.2s; box-shadow:0 4px 20px rgba(10,42,74,0.25);
 }
 .btn-primary:hover { background:var(--blue-mid); transform:translateY(-2px); }
@@ -108,8 +124,8 @@ section { padding:90px 6vw; }
 .section-sub { color:var(--text-muted); font-size:0.97rem; max-width:480px; line-height:1.75; }
 
 /* ABOUT */
-.about { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; background:#fff; }
-.about-image { background:linear-gradient(135deg,var(--blue-soft),#e8f4fd); border-radius:32px; padding:60px 40px; text-align:center; }
+.about { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; background:#fff; }
+.about-image { background:linear-gradient(135deg,var(--blue-soft),#e8f4fd); border-radius:32px; padding:60px 40px; text-align:center; position:sticky; top:100px; }
 .about-emoji { font-size:6rem; display:block; margin-bottom:16px; animation:float 3s ease-in-out infinite 1s; }
 .about-image p { font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--blue-deep); font-weight:600; }
 .values-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:32px; }
@@ -119,12 +135,8 @@ section { padding:90px 6vw; }
 .value-card h4 { font-size:0.88rem; font-weight:600; color:var(--blue-deep); margin-bottom:3px; }
 .value-card p { font-size:0.78rem; color:var(--text-muted); }
 
-/* REDES SOCIALES */
-.social { background:var(--cream); }
-.social-intro { text-align:center; margin-bottom:48px; }
-.social-intro .section-sub { margin:0 auto; }
-.social-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
-.social-card { border-radius:22px; padding:36px 26px; text-decoration:none; transition:transform 0.3s,box-shadow 0.3s; }
+/* REDES SOCIALES mini */
+.social-card { border-radius:22px; padding:36px 26px; text-decoration:none; transition:transform 0.3s,box-shadow 0.3s; display:block; }
 .social-card:hover { transform:translateY(-5px); box-shadow:0 16px 50px rgba(0,0,0,0.12); }
 .social-card.instagram { background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
 .social-card.facebook  { background:linear-gradient(135deg,#1877f2,#0d55c2); }
@@ -132,27 +144,50 @@ section { padding:90px 6vw; }
 .s-icon { font-size:2.4rem; margin-bottom:14px; display:block; }
 .social-card h3 { font-size:1.05rem; color:#fff; font-weight:700; margin-bottom:6px; }
 .social-card p  { font-size:0.85rem; color:rgba(255,255,255,0.8); margin-bottom:18px; }
-.s-link { display:inline-flex; align-items:center; background:rgba(255,255,255,0.2); color:#fff; font-size:0.8rem; font-weight:600; padding:7px 14px; border-radius:50px; backdrop-filter:blur(8px); transition:background 0.2s; }
+.s-link { display:inline-flex; align-items:center; background:rgba(255,255,255,0.2); color:#fff; font-size:0.8rem; font-weight:600; padding:7px 14px; border-radius:50px; transition:background 0.2s; }
 .social-card:hover .s-link { background:rgba(255,255,255,0.35); }
+/* Mini dentro de nosotros */
+.social-grid-mini { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.social-grid-mini .social-card { padding:20px 16px; border-radius:16px; }
+.social-grid-mini .s-icon { font-size:1.6rem; margin-bottom:8px; }
+.social-grid-mini h3 { font-size:0.88rem; margin-bottom:3px; }
+.social-grid-mini p  { font-size:0.75rem; margin-bottom:10px; }
+.social-grid-mini .s-link { font-size:0.72rem; padding:5px 10px; }
 
-/* DOCTORES / LIBRO */
-.doctors { background:#fff; text-align:center; }
+/* MAPA */
+.map-wrap {
+    margin-top:24px;
+    border-radius:16px; overflow:hidden;
+    border:1.5px solid rgba(10,42,74,0.08);
+    box-shadow:0 4px 20px rgba(10,42,74,0.08);
+}
+.map-label {
+    display:flex; align-items:center; gap:12px;
+    background:#fff; padding:14px 18px;
+    border-bottom:1px solid rgba(10,42,74,0.06);
+    font-size:0.85rem; color:var(--text);
+}
+.map-label span:first-child { font-size:1.2rem; flex-shrink:0; }
+.map-label div { flex:1; display:flex; flex-direction:column; gap:2px; }
+.map-label strong { font-size:0.86rem; color:var(--blue-deep); }
+.map-label span:not(:first-child) { font-size:0.78rem; color:var(--text-muted); }
+.map-btn {
+    background:var(--blue-deep); color:#fff; text-decoration:none;
+    font-size:0.78rem; font-weight:600; padding:7px 14px; border-radius:50px;
+    white-space:nowrap; transition:background 0.2s;
+}
+.map-btn:hover { background:var(--blue-mid); }
+.doctors { background:var(--cream); text-align:center; }
 .doctors-header { margin-bottom:50px; }
 .doctors-header .section-sub { margin:0 auto; }
-
 .book-wrapper { display:flex; flex-direction:column; align-items:center; gap:24px; }
 .book { width:100%; max-width:860px; }
-
-/* Portada */
 .book-cover {
     background:linear-gradient(135deg,var(--blue-deep),#1a4a7a);
-    border-radius:12px 24px 24px 12px;
-    padding:64px 48px;
+    border-radius:12px 24px 24px 12px; padding:64px 48px;
     display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px;
-    min-height:420px;
-    box-shadow:-8px 8px 40px rgba(10,42,74,0.35);
-    position:relative; overflow:hidden;
-    cursor:default;
+    min-height:420px; box-shadow:-8px 8px 40px rgba(10,42,74,0.35);
+    position:relative; overflow:hidden; cursor:default;
 }
 .book-cover::before {
     content:''; position:absolute; left:0; top:0; bottom:0; width:32px;
@@ -162,30 +197,23 @@ section { padding:90px 6vw; }
 .book-cover::after {
     content:''; position:absolute; top:-80px; right:-80px;
     width:260px; height:260px; border-radius:50%;
-    background:rgba(255,255,255,0.04);
-    pointer-events:none;
+    background:rgba(255,255,255,0.04); pointer-events:none;
 }
 .book-cover > * { position:relative; z-index:2; }
 .book-cover-icon { font-size:4.5rem; display:block; animation:float 3s ease-in-out infinite; }
 .book-cover h3 { font-family:'Playfair Display',serif; font-size:2rem; color:#fff; font-weight:900; line-height:1.2; text-align:center; }
 .book-cover p { color:rgba(255,255,255,0.65); font-size:0.9rem; }
-
 .btn-open-book {
     background:var(--gold); color:var(--blue-deep); border:none; cursor:pointer;
     font-family:'DM Sans',sans-serif; font-weight:700; font-size:1rem;
-    padding:14px 36px; border-radius:50px;
-    transition:background 0.2s,transform 0.2s;
+    padding:14px 36px; border-radius:50px; transition:background 0.2s,transform 0.2s;
     position:relative; z-index:10;
 }
 .btn-open-book:hover { background:var(--gold-light); transform:translateY(-2px); }
-
-/* Página doctor */
 .book-page {
     display:grid; grid-template-columns:280px 1fr;
-    border-radius:12px 24px 24px 12px;
-    overflow:hidden;
-    box-shadow:-8px 8px 40px rgba(10,42,74,0.22);
-    min-height:420px;
+    border-radius:12px 24px 24px 12px; overflow:hidden;
+    box-shadow:-8px 8px 40px rgba(10,42,74,0.22); min-height:420px;
 }
 .doctor-photo {
     display:flex; align-items:center; justify-content:center;
@@ -197,8 +225,7 @@ section { padding:90px 6vw; }
 .photo-fallback { font-size:6rem; display:block; }
 .doctor-info {
     background:#fff; padding:44px 36px;
-    display:flex; flex-direction:column; justify-content:center;
-    position:relative;
+    display:flex; flex-direction:column; justify-content:center; position:relative;
 }
 .doctor-info::before {
     content:''; position:absolute; left:0; top:0; bottom:0; width:4px;
@@ -217,8 +244,6 @@ section { padding:90px 6vw; }
 .btn-doctor:hover { background:var(--blue-mid); transform:translateY(-1px); }
 .btn-doctor.blue { background:var(--blue-mid); }
 .btn-doctor.blue:hover { background:var(--blue-bright); }
-
-/* Nav libro */
 .book-nav { display:flex; align-items:center; gap:20px; }
 .book-btn {
     background:var(--blue-deep); color:#fff; border:none; cursor:pointer;
@@ -233,17 +258,16 @@ section { padding:90px 6vw; }
 .book-dot.active { background:var(--blue-deep); transform:scale(1.3); }
 
 /* SERVICIOS */
-.services { background:var(--cream); }
+.services { background:#fff; }
 .services-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:52px; flex-wrap:wrap; gap:20px; }
-.services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px; }
+.services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px; }
 .service-card {
-    background:#fff; border-radius:22px; padding:34px 26px;
+    background:var(--cream); border-radius:22px; padding:32px 24px;
     border:1px solid rgba(10,42,74,0.06);
-    transition:transform 0.3s,box-shadow 0.3s;
-    position:relative; overflow:hidden;
+    transition:transform 0.3s,box-shadow 0.3s; position:relative; overflow:hidden;
 }
 .service-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--blue-mid),var(--blue-bright)); transform:scaleX(0); transition:transform 0.3s; transform-origin:left; }
-.service-card:hover { transform:translateY(-5px); box-shadow:0 16px 50px rgba(10,42,74,0.12); }
+.service-card:hover { transform:translateY(-5px); box-shadow:0 16px 50px rgba(10,42,74,0.10); }
 .service-card:hover::after { transform:scaleX(1); }
 .service-card--dark { background:var(--blue-deep); border-color:var(--blue-deep); }
 .service-card--dark h3 { color:#fff; }
@@ -254,7 +278,7 @@ section { padding:90px 6vw; }
 .btn-consult { display:inline-block; margin-top:16px; background:var(--gold); color:var(--blue-deep); text-decoration:none; font-weight:700; padding:10px 20px; border-radius:50px; font-size:0.84rem; transition:background 0.2s; }
 .btn-consult:hover { background:var(--gold-light); }
 
-/* CTA BANNER */
+/* CTA */
 .cta-banner { background:var(--blue-deep); padding:80px 6vw; text-align:center; position:relative; overflow:hidden; }
 .cta-banner::before { content:''; position:absolute; top:-100px; left:50%; transform:translateX(-50%); width:600px; height:300px; border-radius:50%; background:rgba(30,144,255,0.15); pointer-events:none; }
 .cta-banner h2 { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,3rem); color:#fff; margin-bottom:14px; position:relative; }
@@ -283,7 +307,8 @@ footer p { color:rgba(255,255,255,0.4); font-size:0.8rem; }
 /* RESPONSIVE */
 @media(max-width:900px){
     .hero { grid-template-columns:1fr; text-align:center; padding-top:100px; }
-    .hero-sub { margin:0 auto 36px; }
+    .hero-sub { margin:0 auto 12px; }
+    .hero-address { margin-bottom:24px; }
     .hero-actions { justify-content:center; }
     .hero-visual { display:none; }
     .about { grid-template-columns:1fr; }
@@ -291,7 +316,7 @@ footer p { color:rgba(255,255,255,0.4); font-size:0.8rem; }
     .stats { grid-template-columns:1fr; }
     .stat-item { border-right:none; border-bottom:1px solid rgba(255,255,255,0.1); }
     .stat-item:last-child { border-bottom:none; }
-    .social-grid { grid-template-columns:1fr; }
+    .social-grid-mini { grid-template-columns:1fr; }
     .book-page { grid-template-columns:1fr; }
     .doctor-photo { min-height:240px; }
     .doctor-info { padding:28px 22px 32px; }
@@ -318,9 +343,12 @@ footer p { color:rgba(255,255,255,0.4); font-size:0.8rem; }
 <!-- HERO -->
 <header class="hero">
     <div class="hero-content">
-        <div class="hero-tag">Odontología de confianza · Lima, Perú</div>
+        <div class="hero-tag">Odontología de confianza · Trujillo, Perú</div>
         <h1>Tu sonrisa merece el mejor <em>cuidado</em></h1>
         <p class="hero-sub">En Kiru combinamos tecnología moderna con trato cálido para que cada visita sea una experiencia agradable para toda la familia.</p>
+        <a href="https://www.google.com/maps/search/Santa+Cruz+655+Trujillo+Peru" target="_blank" class="hero-address">
+            📍 Santa Cruz 655, Trujillo, Perú
+        </a>
         <div class="hero-actions">
             <a href="https://wa.me/message/7APCBTAZRW4CI1" target="_blank" class="btn-primary">Agendar cita →</a>
             <a href="#servicios" class="btn-secondary">Ver servicios</a>
@@ -340,13 +368,13 @@ footer p { color:rgba(255,255,255,0.4); font-size:0.8rem; }
 <!-- STATS -->
 <div class="stats">
     <div class="stat-item"><span class="stat-num">500+</span><span class="stat-label">Pacientes atendidos</span></div>
-    <div class="stat-item"><span class="stat-num">5+</span><span class="stat-label">Años de experiencia</span></div>
+    <div class="stat-item"><span class="stat-num">3+</span><span class="stat-label">Años de experiencia</span></div>
     <div class="stat-item"><span class="stat-num">100%</span><span class="stat-label">Compromiso con tu salud</span></div>
 </div>
 
 <main>
 
-<!-- 1. NOSOTROS -->
+<!-- 1. NOSOTROS + CONTACTO -->
 <section class="about" id="nosotros">
     <div class="about-image">
         <span class="about-emoji">😁</span>
@@ -355,43 +383,59 @@ footer p { color:rgba(255,255,255,0.4); font-size:0.8rem; }
     <div>
         <span class="section-tag">Sobre nosotros</span>
         <h2 class="section-title">Odontología con <br>corazón y tecnología</h2>
-        <p class="section-sub">En Kiru brindamos atención odontológica profesional con equipos modernos y un trato cercano.</p>
+        <p class="section-sub">En Kiru brindamos atención odontológica profesional con equipos modernos y un trato cercano. Nos importa tu bienestar en cada etapa del tratamiento.</p>
         <div class="values-grid">
             <div class="value-card"><span class="icon">🔬</span><h4>Tecnología moderna</h4><p>Equipos de última generación</p></div>
             <div class="value-card"><span class="icon">🤝</span><h4>Trato cálido</h4><p>Un equipo que te escucha</p></div>
             <div class="value-card"><span class="icon">👨‍👩‍👧</span><h4>Para toda la familia</h4><p>Niños, adultos y mayores</p></div>
             <div class="value-card"><span class="icon">✅</span><h4>Garantía de calidad</h4><p>Resultados que duran</p></div>
         </div>
+
+        <!-- REDES SOCIALES -->
+        <div id="contacto" style="margin-top:36px;">
+            <span class="section-tag" style="display:block;margin-bottom:14px;">Síguenos y escríbenos</span>
+            <div class="social-grid-mini">
+                <a href="https://www.instagram.com/dental.kiru" target="_blank" class="social-card instagram">
+                    <span class="s-icon">📸</span>
+                    <h3>Instagram</h3>
+                    <p>@dental.kiru</p>
+                    <span class="s-link">Ver perfil →</span>
+                </a>
+                <a href="https://www.facebook.com/share/18LA1jwKt5/" target="_blank" class="social-card facebook">
+                    <span class="s-icon">👥</span>
+                    <h3>Facebook</h3>
+                    <p>Kiru Odontológico</p>
+                    <span class="s-link">Ver página →</span>
+                </a>
+                <a href="https://wa.me/message/7APCBTAZRW4CI1" target="_blank" class="social-card whatsapp">
+                    <span class="s-icon">💬</span>
+                    <h3>WhatsApp</h3>
+                    <p>+51 989 871 187</p>
+                    <span class="s-link">Escribir ahora →</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- MAPA -->
+        <div class="map-wrap">
+            <div class="map-label">
+                <span>📍</span>
+                <div>
+                    <strong>Consultorio Odontológico Kiru</strong>
+                    <span>Santa Cruz 655, Trujillo, Perú</span>
+                </div>
+                <a href="https://www.google.com/maps/search/Santa+Cruz+655+Trujillo+Peru" target="_blank" class="map-btn">Cómo llegar →</a>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&q=Santa+Cruz+655,Trujillo,Peru"
+                width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
     </div>
 </section>
 
-<!-- 2. REDES SOCIALES -->
-<section class="social" id="contacto">
-    <div class="social-intro">
-        <span class="section-tag">Síguenos y escríbenos</span>
-        <h2 class="section-title">Encuéntranos en redes sociales</h2>
-        <p class="section-sub">Estamos en Instagram, Facebook y WhatsApp. ¡Escríbenos cuando quieras!</p>
-    </div>
-    <div class="social-grid">
-        <a href="https://www.instagram.com/dental.kiru" target="_blank" class="social-card instagram">
-            <span class="s-icon">📸</span><h3>Instagram</h3>
-            <p>Fotos, casos clínicos y consejos de salud bucal.</p>
-            <span class="s-link">@dental.kiru →</span>
-        </a>
-        <a href="https://www.facebook.com/share/18LA1jwKt5/" target="_blank" class="social-card facebook">
-            <span class="s-icon">👥</span><h3>Facebook</h3>
-            <p>Noticias, promociones y atención al cliente.</p>
-            <span class="s-link">Kiru Odontológico →</span>
-        </a>
-        <a href="https://wa.me/message/7APCBTAZRW4CI1" target="_blank" class="social-card whatsapp">
-            <span class="s-icon">💬</span><h3>WhatsApp</h3>
-            <p>Agenda tu cita de forma rápida y directa.</p>
-            <span class="s-link">+51 989 871 187 →</span>
-        </a>
-    </div>
-</section>
-
-<!-- 3. DOCTORES -->
+<!-- 2. DOCTORES -->
 <section class="doctors" id="doctores">
     <div class="doctors-header">
         <span class="section-tag">Nuestro equipo</span>
@@ -415,7 +459,7 @@ footer p { color:rgba(255,255,255,0.4); font-size:0.8rem; }
             <div id="s1" style="display:none">
                 <div class="book-page">
                     <div class="doctor-photo">
-                        <img src="imagenes/doctora-anmi.jpg" alt="Dra. Anmi Cárdenas Vásquez"
+                        <img src="imagenes/doctora-anmi.png" alt="Dra. Anmi Cárdenas Vásquez"
                              onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
                         <span class="photo-fallback" style="display:none">👩‍⚕️</span>
                     </div>
@@ -439,7 +483,7 @@ footer p { color:rgba(255,255,255,0.4); font-size:0.8rem; }
             <div id="s2" style="display:none">
                 <div class="book-page">
                     <div class="doctor-photo blue-bg">
-                        <img src="imagenes/doctor-daniel.jpg" alt="Dr. Daniel Rosario Reyes"
+                        <img src="imagenes/doctor-daniel.png" alt="Dr. Daniel Rosario Reyes"
                              onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
                         <span class="photo-fallback" style="display:none">👨‍⚕️</span>
                     </div>
@@ -483,7 +527,7 @@ footer p { color:rgba(255,255,255,0.4); font-size:0.8rem; }
     </div>
 </section>
 
-<!-- 4. SERVICIOS -->
+<!-- 3. SERVICIOS -->
 <section class="services" id="servicios">
     <div class="services-header">
         <div>
@@ -498,6 +542,7 @@ footer p { color:rgba(255,255,255,0.4); font-size:0.8rem; }
         <div class="service-card"><span class="service-icon">✨</span><h3>Blanqueamiento dental</h3><p>Tratamiento seguro para recuperar la luminosidad de tu sonrisa.</p></div>
         <div class="service-card"><span class="service-icon">🦴</span><h3>Implantes dentales</h3><p>Solución permanente para reemplazar dientes perdidos.</p></div>
         <div class="service-card"><span class="service-icon">🩺</span><h3>Extracciones</h3><p>Procedimiento seguro y sin dolor para tu salud bucal.</p></div>
+        <div class="service-card"><span class="service-icon">🦷</span><h3>Brackets</h3><p>Un procedimiento estético para corregir la alineación dental.</p></div>
         <div class="service-card service-card--dark">
             <span class="service-icon">💬</span><h3>¿Tienes dudas?</h3>
             <p>Contáctanos por WhatsApp y te orientamos sin compromiso.</p>
@@ -527,7 +572,6 @@ footer p { color:rgba(255,255,255,0.4); font-size:0.8rem; }
 </footer>
 
 <script>
-/* ── LIBRO ── */
 var bookCur = 0;
 var bookTotal = 4;
 
@@ -538,7 +582,6 @@ function bookGo(n) {
     }
     document.getElementById('s' + n).style.display = 'block';
     bookCur = n;
-
     var dots = document.querySelectorAll('.book-dot');
     for (var j = 0; j < dots.length; j++) {
         dots[j].classList.toggle('active', j === n);
@@ -547,22 +590,19 @@ function bookGo(n) {
     document.getElementById('bNext').disabled = (n === bookTotal - 1);
 }
 
-/* Swipe móvil */
 var bk = document.getElementById('book');
 var tx = 0;
 bk.addEventListener('touchstart', function(e){ tx = e.changedTouches[0].screenX; }, {passive:true});
-bk.addEventListener('touchend',   function(e){
+bk.addEventListener('touchend', function(e){
     var d = tx - e.changedTouches[0].screenX;
-    if (d >  50) bookGo(bookCur + 1);
+    if (d > 50) bookGo(bookCur + 1);
     if (d < -50) bookGo(bookCur - 1);
 }, {passive:true});
 
-/* ── NAV ── */
 window.addEventListener('scroll', function(){
     document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
 });
 
-/* ── STATS ── */
 var statsRan = false;
 window.addEventListener('scroll', function(){
     if (statsRan) return;
