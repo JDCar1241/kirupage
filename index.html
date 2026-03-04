@@ -73,9 +73,16 @@ nav.scrolled { box-shadow:0 4px 24px rgba(10,42,74,0.12); }
 }
 .hero-address {
     display:inline-flex; align-items:center; gap:8px;
-    font-size:0.88rem; color:var(--blue-mid); font-weight:500;
-    background:var(--blue-soft); padding:7px 16px; border-radius:50px;
+    font-size:0.88rem; color:var(--blue-mid); font-weight:600;
+    background:var(--blue-soft); padding:9px 18px; border-radius:50px;
     margin-bottom:32px; animation:fadeUp 0.6s 0.5s both;
+    text-decoration:none; border:1.5px solid rgba(21,101,168,0.2);
+    transition:background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.hero-address:hover {
+    background:#c5ddf7;
+    transform:translateY(-2px);
+    box-shadow:0 4px 16px rgba(21,101,168,0.15);
 }
 .hero-actions { display:flex; gap:16px; align-items:center; animation:fadeUp 0.6s 0.55s both; }
 .btn-primary {
@@ -147,7 +154,29 @@ section { padding:90px 6vw; }
 .social-grid-mini p  { font-size:0.75rem; margin-bottom:10px; }
 .social-grid-mini .s-link { font-size:0.72rem; padding:5px 10px; }
 
-/* DOCTORES / LIBRO */
+/* MAPA */
+.map-wrap {
+    margin-top:24px;
+    border-radius:16px; overflow:hidden;
+    border:1.5px solid rgba(10,42,74,0.08);
+    box-shadow:0 4px 20px rgba(10,42,74,0.08);
+}
+.map-label {
+    display:flex; align-items:center; gap:12px;
+    background:#fff; padding:14px 18px;
+    border-bottom:1px solid rgba(10,42,74,0.06);
+    font-size:0.85rem; color:var(--text);
+}
+.map-label span:first-child { font-size:1.2rem; flex-shrink:0; }
+.map-label div { flex:1; display:flex; flex-direction:column; gap:2px; }
+.map-label strong { font-size:0.86rem; color:var(--blue-deep); }
+.map-label span:not(:first-child) { font-size:0.78rem; color:var(--text-muted); }
+.map-btn {
+    background:var(--blue-deep); color:#fff; text-decoration:none;
+    font-size:0.78rem; font-weight:600; padding:7px 14px; border-radius:50px;
+    white-space:nowrap; transition:background 0.2s;
+}
+.map-btn:hover { background:var(--blue-mid); }
 .doctors { background:var(--cream); text-align:center; }
 .doctors-header { margin-bottom:50px; }
 .doctors-header .section-sub { margin:0 auto; }
@@ -317,7 +346,9 @@ footer p { color:rgba(255,255,255,0.4); font-size:0.8rem; }
         <div class="hero-tag">Odontología de confianza · Trujillo, Perú</div>
         <h1>Tu sonrisa merece el mejor <em>cuidado</em></h1>
         <p class="hero-sub">En Kiru combinamos tecnología moderna con trato cálido para que cada visita sea una experiencia agradable para toda la familia.</p>
-        <div class="hero-address">📍 Santa Cruz 655, Trujillo, Perú</div>
+        <a href="https://www.google.com/maps/search/Santa+Cruz+655+Trujillo+Peru" target="_blank" class="hero-address">
+            📍 Santa Cruz 655, Trujillo, Perú
+        </a>
         <div class="hero-actions">
             <a href="https://wa.me/message/7APCBTAZRW4CI1" target="_blank" class="btn-primary">Agendar cita →</a>
             <a href="#servicios" class="btn-secondary">Ver servicios</a>
@@ -382,6 +413,18 @@ footer p { color:rgba(255,255,255,0.4); font-size:0.8rem; }
                     <p>+51 989 871 187</p>
                     <span class="s-link">Escribir ahora →</span>
                 </a>
+            </div>
+        </div>
+
+        <!-- MAPA -->
+        <div class="map-wrap">
+            <div class="map-label">
+                <span>📍</span>
+                <div>
+                    <strong>Consultorio Odontológico Kiru</strong>
+                    <span>Santa Cruz 655, Trujillo, Perú</span>
+                </div>
+                <a href="https://www.google.com/maps/search/Santa+Cruz+655+Trujillo+Peru" target="_blank" class="map-btn">Cómo llegar →</a>
             </div>
         </div>
     </div>
